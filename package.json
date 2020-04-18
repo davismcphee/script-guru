@@ -1,0 +1,20 @@
+{
+  "name": "script-guru",
+  "version": "1.0.0",
+  "description": "A utility library for GameGuru",
+  "main": "index.js",
+  "author": "Davis McPhee",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "docs:dev": "yarn docs:gen && vuepress dev src/docs",
+    "docs:build": "yarn docs:gen && vuepress build src/docs",
+    "docs:gen": "node generate-documents.js"
+  },
+  "devDependencies": {
+    "fs-extra": "^9.0.0",
+    "glob": "^7.1.6",
+    "vuepress": "^1.4.1",
+    "vuepress-bar": "^0.2.6"
+  }
+}

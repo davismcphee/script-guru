@@ -1,0 +1,5 @@
+node_modules
+
+# Ignore the generated doc files, but not our README.md files
+src/docs/step.2.docs/**/*.md
+!src/docs/step.2.docs/**/README.md

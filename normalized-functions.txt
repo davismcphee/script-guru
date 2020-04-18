@@ -1,0 +1,865 @@
+UpdateWeaponStats() -- Call this to instantly update all g_Weapon* data
+ResetWeaponSystems() -- resets any projectiles currently active in game
+
+SetWeaponSlot(index,got flag,preference flag) -- Sets the weapon data directly, index is 1 through 10. The got flag value is the weapon ID of the weapon you have in that slot. By setting it, you can effectively grant the player that weapon without them having to pick it up, but you should ensure that weapon is placed somewhere in the level so it can load it the particulars.  The preference flag value also takes a Weapon ID and is used when you want to make sure when a weapon is collected, it will go to that slot, so  SetWeaponSlot(9,0,12) will make sure that when you collect Weapon ID 12 it will automatically be assigned to slot 9.
+
+GetWeaponAmmo(index) -- GetWeaponAmmo(index) -- quantity = GetWeaponAmmo(index)  Sets the weapon data directly, index is 1 through 10
+SetWeaponAmmo(index,ammo quantity) -- Sets the weapon data directly, index is 1 through 10
+GetWeaponClipAmmo(index) -- quantity = GetWeaponClipAmmo(index) Sets the weapon data directly, index is 1 through 10
+SetWeaponClipAmmo(index,clip quantity) -- Sets the weapon data directly, index is 1 through 10
+GetWeaponPoolAmmo(index) -- quantity = GetWeaponPoolAmmo(index) Sets the weapon data directly, index is 1 through 10
+SetWeaponPoolAmmo(index,pool ammo quantity) -- Sets the weapon data directly, index is 1 through 10
+GetWeaponSlot(index) -- Gets WeaponID from slot, index is 1 through 10
+GetPlayerWeaponID() -- WeaponID = GetPlayerWeaponID() Returns the WeaponID the player is currently carrying
+GetWeaponID(GunNameString) -- Gets WeaponID associated with current GunNameString
+GetEntityWeaponID(e) -- Gets the WeaponID associated with the entity specified
+SetWeaponDamage(WeaponID,FireModeIndex,Value) -- Sets damage value of weapon
+SetWeaponAccuracy(WeaponID,FireModeIndex,Value) -- Sets accuracy value of weapon
+SetWeaponReloadQuantity(WeaponID,FireModeIndex,Value) -- Sets reload quantity value of weapon
+SetWeaponFireIterations(WeaponID,FireModeIndex,Value) -- Sets shot iterations value of weapon
+SetWeaponRange(WeaponID,FireModeIndex,Value) -- Sets range value of weapon
+SetWeaponDropoff(WeaponID,FireModeIndex,Value) -- Sets dropoff value of weapon
+SetWeaponSpotLighting(WeaponID,FireModeIndex,Value) -- Sets whether weapon uses spot light effect
+GetWeaponDamage(WeaponID,FireModeIndex) -- Value = GetWeaponDamage(WeaponID,FireModeIndex) Get damage value of weapon
+GetWeaponAccuracy(WeaponID,FireModeIndex) -- Value = GetWeaponAccuracy(WeaponID,FireModeIndex) Get accuracy value of weapon
+GetWeaponReloadQuantity(WeaponID,FireModeIndex) -- Value = GetWeaponReloadQuantity(WeaponID,FireModeIndex) Get reload quantity value of weapon
+GetWeaponFireIterations(WeaponID,FireModeIndex) -- Value = GetWeaponFireIterations(WeaponID,FireModeIndex) Get shot iterations value of weapon
+GetWeaponRange(WeaponID,FireModeIndex) -- Value = GetWeaponRange(WeaponID,FireModeIndex) Get range value of weapon
+GetWeaponDropoff(WeaponID,FireModeIndex) -- Value = GetWeaponDropoff(WeaponID,FireModeIndex) Get dropoff value of weapon
+GetWeaponSpotLighting(WeaponID,FireModeIndex) -- Value = GetWeaponSpotLighting(WeaponID,FireModeIndex) Get whether weapon uses spot light effect
+
+WrapAngle(Angle,Dest,Smoothing) -- V = WrapAngle(Angle,Dest,Smoothing)  will smoothly change Angle to Dest, returning in V. Smoothing 0 to 1.
+SetCameraOverride(i) where i is 0-off, 1-position only, 2-angle only, 3-position and angle
+SetCameraPosition(c,x,y,z) where c should be zero and XYZ are 3D coordinates
+SetCameraAngle(c,x,y,z) where c should be zero and XYZ are euler angles
+GetCameraPositionX(c) -- V = GetCameraPositionX(c)  where V is the X coordinate of the specified camera
+GetCameraPositionY(c) -- V = GetCameraPositionY(c)  where V is the Y coordinate of the specified camera
+GetCameraPositionZ(c) -- V = GetCameraPositionZ(c)  where V is the Z coordinate of the specified camera
+GetCameraAngleX(c) -- V = GetCameraAngleX(c)  where V is the X angle of the specified camera
+GetCameraAngleY(c) -- V = GetCameraAngleY(c)  where V is the Y angle of the specified camera
+GetCameraAngleZ(c) -- V = GetCameraAngleZ(c)  where V is the Z angle of the specified camera
+
+ForcePlayer(angle,velocity) where angle is the angle and physics velocity to push the player
+
+SetEntityActive(e,active flag) -- Sets the entity data directly, e is entity index
+SetEntityActivated(e,activated flag) -- Sets the entity data directly, e is entity index
+SetEntityCollected(e,collected flag) -- Sets the entity data directly, e is entity index
+SetEntityHasKey(e,haskey flag) -- Sets the entity data directly, e is entity index
+GetEntityVisibility(e) -- vis = GetEntityVisibility(e) where e is the entity number and return vis (0-hidden,1-shown)
+GetEntityActive(e) -- flag = GetEntityActive(e) returns 1 if the entity is active and not in process of dying
+GetEntityPositionX(e) -- x = GetEntityPositionX(e) where e is the entity number and returns the X position
+GetEntityPositionY(e) -- y = GetEntityPositionY(e) where e is the entity number and returns the Y position
+GetEntityPositionZ(e) -- z = GetEntityPositionZ(e) where e is the entity number and returns the Z position
+GetEntityAngleX(e) -- x = GetEntityAngleX(e) where e is the entity number and returns the X angle
+GetEntityAngleY(e) -- y = GetEntityAngleY(e) where e is the entity number and returns the Y angle
+GetEntityAngleZ(e) -- z = GetEntityAngleZ(e) where e is the entity number and returns the Z angle
+GetAnimationSpeed(e) -- speed = GetAnimationSpeed(e) where e is the entity number and speed is the ANIMSPEED of the entity
+SetAnimationSpeedModulation(e,speed) -- where e is the entity number and speed is animation speed modulator
+GetAnimationSpeedModulation(e) -- speed = GetAnimationSpeedModulation(e) where e is the entity number and speed is the animation speed modulator
+GetMovementDelta(e) -- delta = GetMovementDelta(e) where e is the entity number and delta is the movement distance since the last cycle
+
+SetEntityString(e,slot,string,loadSound) -- where e is the entity number and slot (0-4) to write the string into
+                                                                 -- set loadSound to 1 to also relplace the sound sample in the specified
+																 -- slot with the one pointed to by 'string'
+GetEntityString(e,slot) -- where e is the entity number and slot (0-4) is the sound slot index
+
+GetEntitySpawnAtStart(e) -- state = GetEntitySpawnAtStart(e) returns the state of the spawn (0-dont spawn at start, 1-spawn at start, 2-spawned during game)
+GetEntityFilePath(e) -- string = GetEntityFilePath(e) returns the entity file path to be used for helping inventory image systems
+GetEntityAnimationStart(e,animsetindex) -- frame = GetEntityAnimationStart(e,animsetindex) returns frame (Y) stored in FPE under animX = Y,Z where X is animsetindex
+GetEntityAnimationFinish(e,animsetindex) -- frame = GetEntityAnimationFinish(e,animsetindex) returns frame (Z) stored in FPE under animX = Y,Z where X is animsetindex
+GetEntityAnimationFound(e,animsetindex) -- flag = GetEntityAnimationFound(e,animsetindex) returns a 1 if this value was set in FPE anim system (not CSI)
+GetAmmoClipMax(e) -- ammoclipmax = GetAmmoClipMax(e) returns the maximum units per ammo clip for the held weapon of the entity
+GetAmmoClip(e) -- ammoclip = GetAmmoClip(e) returns the current ammo in clip for the held weapon of the entity
+SetAmmoClip(e,ammoquantity) -- sets the ammo clip quantity for the held weapon of the entity
+	
+FreezeEntity(e,mode) -- where e is the entity index and mode is reserved. Will freeze entity physics position
+UnFreezeEntity(e) -- where e is the entity index to be unfrozen from a previous call to FreezeEntity
+
+GetTerrainHeight(x,z) -- height = GetTerrainHeight(x,z) where X and Z are the coordinates on the terrain you want the height from
+
+GetFogNearest() -- value = GetFogNearest() gets the setting value currently used in the game
+GetFogDistance() -- value = GetFogDistance() gets the setting value currently used in the game
+GetFogRed() -- value = GetFogRed() gets the setting value currently used in the game
+GetFogGreen() -- value = GetFogGreen() gets the setting value currently used in the game
+GetFogBlue() -- value = GetFogBlue() gets the setting value currently used in the game
+GetFogIntensity() -- value = GetFogIntensity() gets the setting value currently used in the game
+GetAmbienceIntensity() -- value = GetAmbienceIntensity() gets the setting value currently used in the game
+GetAmbienceRed() -- value = GetAmbienceRed() gets the setting value currently used in the game
+GetAmbienceGreen() -- value = GetAmbienceGreen() gets the setting value currently used in the game
+GetAmbienceBlue() -- value = GetAmbienceBlue() gets the setting value currently used in the game
+GetSurfaceRed() -- value = GetSurfaceRed() gets the setting value currently used in the game
+GetSurfaceGreen() -- value = GetSurfaceGreen() gets the setting value currently used in the game
+GetSurfaceBlue() -- value = GetSurfaceBlue() gets the setting value currently used in the game
+GetSurfaceIntensity() -- value = GetSurfaceIntensity() gets the setting value currently used in the game
+GetPostVignetteRadius() -- value = GetPostVignetteRadius() gets the setting value currently used in the game
+GetPostVignetteIntensity() -- value = GetPostVignetteIntensity() gets the setting value currently used in the game
+GetPostMotionDistance() -- value = GetPostMotionDistance() gets the setting value currently used in the game
+GetPostMotionIntensity() -- value = GetPostMotionIntensity() gets the setting value currently used in the game
+GetPostDepthOfFieldDistance() -- value = GetPostDepthOfFieldDistance() gets the setting value currently used in the game
+GetPostDepthOfFieldIntensity() -- value = GetPostDepthOfFieldIntensity() gets the setting value currently used in the game
+
+LoadImage("myFolder\\myImage.png") -- myImage = LoadImage("myFolder\\myImage.png") Anywhere inside GG Files folder (however it is best to put into scriptbank images folder for making standalones)
+GetImageWidth(1) -- myWidth = GetImageWidth(1) get percentage width of image
+GetImageHeight(1) -- myHeight = GetImageHeight(1) get percentage height of image
+CreateSprite(myImage) -- mySprite = CreateSprite(myImage) 
+PasteSprite(mySprite) -- pastes the sprite at its current location (good for pasting sprite BEHIND text)
+PasteSpritePosition(mySprite,x,y) -- as above but pasted at a specified XY coordinate
+DeleteSprite(mySprite)
+SetSpritePosition(mySprite,x,y)
+SetSpriteSize(mySprite,sizeX,sizeZ) -- passing -1 as one of the params ensure the sprite retains its aspect ratio
+SetSpriteDepth(mySprite,10) (0 is front,100 is back)
+SetSpriteColor(mySprite,red,green,blue,alpha)
+SetSpriteAngle(mySprite,180)
+SetSpriteOffset(mySprite,5,-1) -- would be the centre for a 10% width image assigned to a sprite, passing -1 as one of the params ensure the sprite retains its aspect ratio
+SetSpriteImage(mySprite,myImage)
+
+LoadGlobalSound(filename,iID) -- where iID is an index greater than zero and filename points to a WAV file in your game installation	
+DeleteGlobalSound(iID) -- where iID is the index of the sound loaded in the load command
+PlayGlobalSound(iID) -- where iID is the index of the sound to be played
+LoopGlobalSound(iID) -- where iID is the index of the sound to be looped
+StopGlobalSound(iID) -- where iID is the index of the sound to be stopped
+SetGlobalSoundSpeed(iID,speed) -- where iID is the index of the sound to change the speed of
+SetGlobalSoundVolume(iID,volume) -- where iID is the index of the sound to change the volume of
+GetGlobalSoundExist(iID) -- where iID is the index of the sound to check existence of
+GetGlobalSoundPlaying(iID) -- where iID is the index of the sound to check if playing
+GetGlobalSoundLooping(iID) -- where iID is the index of the sound to check if looping
+
+PlayRawSound(iID) -- where iID is the raw engine sound index
+LoopRawSound(iID) -- where iID is the raw engine sound index
+StopRawSound(iID) -- where iID is the raw engine sound index
+SetRawSoundVolume(iID,iVolume) -- where iID is the raw engine sound index and iVolume from 0 to 100
+RawSoundExist(iID) -- iFlag = RawSoundExist(iID) where iID is the raw engine sound index
+RawSoundPlaying(iID) -- iFlag = RawSoundPlaying(iID) where iID is the raw engine sound index
+
+GetTimeElapsed() -- delta = GetTimeElapsed() returns the float time slice of the current game cycle
+
+SetGamePlayerControlJetpackMode(iValue) -- sets the player control data to specified value
+GetGamePlayerControlJetpackMode() -- iValue = GetGamePlayerControlJetpackMode() gets the specified player control data value
+SetGamePlayerControlJetpackFuel(iValue) -- sets the player control data to specified value
+GetGamePlayerControlJetpackFuel() -- iValue = GetGamePlayerControlJetpackFuel() gets the specified player control data value
+SetGamePlayerControlJetpackHidden(iValue) -- sets the player control data to specified value
+GetGamePlayerControlJetpackHidden() -- iValue = GetGamePlayerControlJetpackHidden() gets the specified player control data value
+SetGamePlayerControlJetpackCollected(iValue) -- sets the player control data to specified value
+GetGamePlayerControlJetpackCollected() -- iValue = GetGamePlayerControlJetpackCollected() gets the specified player control data value
+SetGamePlayerControlSoundStartIndex(iValue) -- sets the player control data to specified value
+GetGamePlayerControlSoundStartIndex() -- iValue = GetGamePlayerControlSoundStartIndex() gets the specified player control data value
+SetGamePlayerControlJetpackParticleEmitterIndex(iValue) -- sets the player control data to specified value
+GetGamePlayerControlJetpackParticleEmitterIndex() -- iValue = GetGamePlayerControlJetpackParticleEmitterIndex() gets the specified player control data value
+SetGamePlayerControlJetpackThrust(iValue) -- sets the player control data to specified value
+GetGamePlayerControlJetpackThrust() -- iValue = GetGamePlayerControlJetpackThrust() gets the specified player control data value
+
+SetPlayerWeapons(0) disabled player weapons, SetPlayerWeapons(1) restores them
+SetAttachmentVisible(e,1). 1 sets the entities attachment to be visible (such as their weapon), 0 switches it off
+SetFlashLight(1), 1 switches the flash light on, 0 off
+SetFlashLightKeyEnabled(1) - 1 for on, 0 for off. Disables the flash light key from being used
+SetOcclusion(100), control the occluder from script! set the occlude from 0 (off) to 100 (max). 10 and under for minimal popping
+
+SetFont("my1) To change in game font. Fonts 1-3 are the default ones used.
+You can place your texture atlas bitmap font file in the Files\fontbank\ folder with the name FPSCR-Font-XX.png where XX is the unique name for your font. When you want to use it, simply call the command SetFont("XX", YY) where XX is the unique name above and YY is the index you want to 'overwrite'. Remember to include the 'FPSCR-Font-XX-Subimages.fnt' file which describes the coordinates within the texture atlas image for the specific bitmap fonts contained therein.
+
+GetFirstEntitySpawn() -- useful for scripts (such as the radar) that need to deal with entities that can come into existence at any time (returns 0 if no new entity)
+GetNextEntitySpawn() -- returns the next new spawn in the list, 0 if the end of the list is reached
+
+GetDeviceWidth() -- returns the display width in pixels
+GetDeviceHeight() -- returns the current display height in pixels
+
+GetTimeElapsed() -- returns the time elapsed since the last cycle
+GetKeyState(y) -- x=GetKeyState(y) returns 1 in x when keycode specified in y is pressed
+Timer() -- x=Timer() returns the global time in milliseconds since the system started
+MouseMoveX() -- x=MouseMoveX() returns the mouse delta since the last time it was called
+MouseMoveY() -- y=MouseMoveY() returns the mouse delta since the last time it was called
+GetDesktopWidth() -- returns the current desktop width
+GetDesktopHeight() -- returns the current desktop height
+CurveValue(dest,current,smooth) -- x=CurveValue(dest,current,smooth) returns the smoothed value based on the smooth factor
+CurveAngle(dest,current,smooth) -- a=CurveAngle(dest,current,smooth) as CurveValue but handles angles from 0-360 degrees
+PositionMouse(x,y) -- repositions the hardware mouse pointer in real-time (screen size coords)
+GetDynamicCharacterControllerDidJump() -- x=GetDynamicCharacterControllerDidJump() returns 1 if controller jumped
+GetCharacterControllerDucking() -- x=GetCharacterControllerDucking() returns 1 if the player has been forced to duck
+WrapValue(y) -- x=WrapValue(y) takes the value y and wraps it to an angle between 0-360 degrees
+GetElapsedTime() -- x=GetElapsedTime() returns the elapsed delta time since the last game cycle
+GetPlrObjectPositionX() -- x=GetPlrObjectPositionX() returns the raw x position of the visible player object
+GetPlrObjectPositionY() -- x=GetPlrObjectPositionY() returns the raw y position of the visible player object
+GetPlrObjectPositionZ() -- x=GetPlrObjectPositionZ() returns the raw z position of the visible player object
+GetPlrObjectAngleX() -- x=GetPlrObjectAngleX() returns the raw x angle of the visible player object
+GetPlrObjectAngleY() -- x=GetPlrObjectAngleY() returns the raw y angle of the visible player object
+GetPlrObjectAngleZ() -- x=GetPlrObjectAngleZ() returns the raw z angle of the visible player object
+GetGroundHeight(x,z) -- y=GetGroundHeight(x,z) returns the terrain height of the coordinates specified by x and z
+NewXValue(current,angle,distance) -- x=NewXValue(current,angle,distance) projects a new x position from the specified angle and distance 
+NewZValue(current,angle,distance) -- z=NewZValue(current,angle,distance) projects a new z position from the specified angle and distance
+ControlDynamicCharacterController(iObj,fAngleY,fAngleX,fSpeed,fJump,fDucking,fPushAngle,fPushForce,fThrustUpwards) -- controls the physics capsule of the player
+GetCharacterHitFloor() -- x=GetCharacterHitFloor() returns a value if the player hits the floor
+GetCharacterFallDistance() -- x=GetCharacterFallDistance() returns the distance the player fell when it hit the floor
+RayTerrain(x,y,z,x2,y2,z2) -- r=RayTerrain(x,y,z,x2,y2,z2) returns 1 if the ray cast hits the terrain geometry
+GetRayCollisionX() -- x=GetRayCollisionX() returns the X position of the terrain hit position
+GetRayCollisionY() -- y=GetRayCollisionY() returns the Y position of the terrain hit position
+GetRayCollisionZ() -- z=GetRayCollisionZ() returns the Z position of the terrain hit position
+IntersectAll(x1,y1,z1,x2,y2,z2,IgnoreObj) -- x=IntersectAll(x1,y1,z1,x2,y2,z2,IgnoreObj) returns 1 if the ray cast hits ANY entity or lightmapped geometry
+IntersectStatic(x1,y1,z1,x2,y2,z2,IgnoreObj) -- x=IntersectStatic(x1,y1,z1,x2,y2,z2,IgnoreObj) returns 1 if the ray cast hits non-animating entity or lightmapped geometry
+GetIntersectCollisionX() -- x=GetIntersectCollisionX() returns the X position of the entity hit position
+GetIntersectCollisionY() -- y=GetIntersectCollisionY() returns the Y position of the entity hit position
+GetIntersectCollisionZ() -- z=GetIntersectCollisionZ() returns the Z position of the entity hit position
+GetIntersectCollisionNX() -- x=GetIntersectCollisionNX() returns the X normal of the entity hit surface
+GetIntersectCollisionNY() -- y=GetIntersectCollisionNY() returns the Y normal of the entity hit surface
+GetIntersectCollisionNZ() -- z=GetIntersectCollisionNZ() returns the Z normal of the entity hit surface
+PositionCamera(cam,x,y,z) -- positions the specified camera at the xyz position
+PointCamera(cam,x,y,z) -- angles the specified camera towards the xyz position
+MoveCamera(cam,step) -- moves the specified camera at its current angle by the step amount
+GetObjectExist(obj) -- x=GetObjectExist(obj) returns if the specified object exists
+SetObjectFrame(obj,x) -- sets the animation frame of the specified object 
+GetObjectFrame(obj) -- x=GetObjectFrame(obj) returns the animation frame of the specified object 
+SetObjectSpeed(obj,x) -- sets the animation speed of the specified object 
+GetObjectSpeed(obj) -- x=GetObjectSpeed(obj) returns the animation speed of the specified object 
+PositionObject(obj,x,y,z) -- sets the position of the specified object
+RotateObject(obj,x,y,z) -- sets the angle of the specified object
+GetObjectAngleX(obj) -- x=GetObjectAngleX(obj) returns the X position of the specified object
+GetObjectAngleY(obj) -- y=GetObjectAngleY(obj) returns the Y position of the specified object
+GetObjectAngleZ(obj) -- z=GetObjectAngleZ(obj) returns the Z position of the specified object
+RunCharLoop() -- runs the legacy animation system to control character index GetGamePlayerStateCharAnimIndex()
+TriggerWaterRipple(x,y,z) -- triggers a ripple decal animation at the xyz position 
+PlayFootfallSound(type,x,y,z,lastsnd) -- snd=PlayFootfallSound(type,x,y,z,lastsnd) triggers footfall sound and returns raw sound index used
+ResetUnderwaterState() -- resets the underwater sub-system when player emerges from water
+SetUnderwaterOn() -- use this when the player goes underwater for visual changes
+SetUnderwaterOff() -- use this when the player goes above water for visual changes
+
+------- Particle system commands --------- 
+ParticlesGetFreeEmitter() -- emitterId = ParticlesGetFreeEmitter() where emitterId is the index of the particle emitter
+ParticlesAddEmitter(
+    emitterId,               -- create a particle emitter with the following parameters..
+    animationSpeed,          -- 
+    startsOffRandomAngle,    -- 0 no, 1 yes
+    offsetMinX,              -- All these look really daunting if you aren't aware of how particles systems work
+    offsetMinY,              -- but basically they are all ranges of values between which the created particles 
+    offsetMinZ,              -- will spawn with or end with, so for example if you specify a minimum x offset of 
+    offsetMaxX,              -- -100 and a maximum x offset of +100 then all particles generated will be given a
+    offsetMaxY,              -- random starting position within that range of either the player position or an 
+    offsetMaxZ,              -- entity position (if using the ParticlesAddEmitterEx variant,see below)
+    scaleStartMin,           --
+    scaleStartMax,           --
+    scaleEndMin,             --
+    scaleEndMax,             --
+    movementSpeedMinX,       --
+    movementSpeedMinY,       --
+    movementSpeedMinZ,       --
+    movementSpeedMaxX,       --
+    movementSpeedMaxY,       --
+    movementSpeedMaxZ,       --
+    rotateSpeedMinZ,         --
+    rotateSpeedMaxZ,         --
+    lifeMin,                 --
+    lifeMax,                 --
+    alphaStartMin,           -- Alpha range is 0 .. 100, i.e. 0 = invisible ... 100 = fully opaque
+    alphaStartMax,           --
+    alphaEndMin,             --
+    alphaEndMax,             --
+    frequency                -- frequency with which particles are spawned in milliseconds
+)
+
+ParticlesAddEmitterEx(
+    emitterId,               -- create a particle emitter with the following parameters..
+    animationSpeed,          -- 
+    startsOffRandomAngle,    -- 0 no, 1 yes
+    offsetMinX,              -- All these look really daunting if you aren't aware of how particles systems work
+    offsetMinY,              -- but basically they are all ranges of values between which the created particles 
+    offsetMinZ,              -- will spawn with or end with, so for example if you specify a minimum x offset of 
+    offsetMaxX,              -- -100 and a maximum x offset of +100 then all particles generated will be given a
+    offsetMaxY,              -- random starting position within that range of either the player position or an 
+    offsetMaxZ,              -- entity position (if using the ParticlesAddEmitterEx variant,see below)
+    scaleStartMin,           --
+    scaleStartMax,           --
+    scaleEndMin,             --
+    scaleEndMax,             --
+    movementSpeedMinX,       --
+    movementSpeedMinY,       --
+    movementSpeedMinZ,       --
+    movementSpeedMaxX,       --
+    movementSpeedMaxY,       --
+    movementSpeedMaxZ,       --
+    rotateSpeedMinZ,         --
+    rotateSpeedMaxZ,         --
+    lifeMin,                 --
+    lifeMax,                 --
+    alphaStartMin,           -- Alpha range is 0 .. 100, i.e. 0 = invisible ... 100 = fully opaque
+    alphaStartMax,           --
+    alphaEndMin,             --
+    alphaEndMax,             --
+    frequency,               -- frequency with which particles are spawned in milliseconds
+    entityid,				 -- particles will be spawned at the location of the given entity ( or -1 )
+    limbindex,			     -- particles spawned at limb if applicable ( or 0 )
+    particleimage,			 -- specified imageFile value will be used ( see ParticlesLoadImage )
+    imageframe               -- for custom images specifies number of frames ( 64,16 or 4 )
+)
+						
+ParticlesDeleteEmitter(emitterId) -- where emitterId is the index of the particle emitter
+ParticlesLoadImage("effectbank\\particles\\flowerpuff.dds") --  Example imageFile = ParticlesLoadImage("effectbank\\particles\\flowerpuff.dds") Allows dynamic loading of custom image files which can then be passed into ParticlesAddEmitterEx sprite sheets have to be square, e.g. 2x2 or 6x6 (4 frames and 36 frames respectively), maximum size is 64x64 (4096 frames)				
+ParticlesLoadEffect("effectbank\\reloaded\\decal_basic_additive.fx",emitterId) -- Example effectId = ParticlesLoadEffect("effectbank\\reloaded\\decal_basic_additive.fx",emitterId) Changes the shader effect used for a given particle emitter
+
+					
+-- the following commands allow on-the-fly altering of specific particle creation parameters
+ParticlesSpawnParticle(emitterId,xPos,yPos,zPos) -- forces the emitter to spawn a particle at the specified position
+ParticlesSetFrames(emitterId,animationSpeed,startFrame,endFrame)
+ParticlesSetSpeed(emitterId,movementSpeedMinX,movementSpeedMinY,movementSpeedMinZ,movementSpeedMaxX,movementSpeedMaxY,movementSpeedMaxZ)
+ParticlesSetOffset(emitterId,offsetMinX,offsetMinY,offsetMinZ,offsetMaxX,offsetMaxY,offsetMaxZ) 
+ParticlesSetScale(emitterId,scaleStartMin,scaleStartMax,scaleEndMin,scaleEndMax)  
+ParticlesSetAlpha(emitterId,alphaStartMin,alphaStartMax,alphaEndMin,alphaEndMax)
+ParticlesSetAngle(emitterId,xAngle,yAngle,zAngle)  - Euler angles 
+
+-- the '0' parameters below are not yet fully implemented in the engine, basically they are placeholders for the future
+ParticlesSetRotation(emitterId,0,0,rotateSpeedMinZ,0,0,rotateSpeedMaxZ)
+ParticlesSetLife(emitterId,lifeMin,lifeMax,maxParticles,0,maxPerFrame) 
+-- maxParticles default is 100, maxPerFrame default is 50
+
+-- This command mimics a basic wind effect, all particles will be effected by this ..
+ParticlesSetWindVector(windX,windZ) -- values are X & Z units per frame
+-- unless specifically omitted sith this command
+ParticlesSetNoWind(emitterId)  -- All particles created by the specified emitter will not be affected by wind.
+
+-- This command mimics a basic gravity component
+ParticlesSetGravity(emitterId,startG,endG) -- values are Y units per frame
+
+-----------------------------------------
+
+GetGamePlayerControlJetpackMode() -- command used by the default player control mechanism
+GetGamePlayerControlJetpackFuel() -- command used by the default player control mechanism
+GetGamePlayerControlJetpackHidden() -- command used by the default player control mechanism
+GetGamePlayerControlJetpackCollected() -- command used by the default player control mechanism
+GetGamePlayerControlSoundStartIndex() -- command used by the default player control mechanism
+GetGamePlayerControlJetpackParticleEmitterIndex() -- command used by the default player control mechanism
+GetGamePlayerControlJetpackThrust() -- command used by the default player control mechanism
+GetGamePlayerControlStartStrength() -- command used by the default player control mechanism
+GetGamePlayerControlIsRunning() -- command used by the default player control mechanism
+GetGamePlayerControlFinalCameraAngley() -- command used by the default player control mechanism
+GetGamePlayerControlCx() -- command used by the default player control mechanism
+GetGamePlayerControlCy() -- command used by the default player control mechanism
+GetGamePlayerControlCz() -- command used by the default player control mechanism
+GetGamePlayerControlBasespeed() -- command used by the default player control mechanism
+GetGamePlayerControlCanRun() -- command used by the default player control mechanism
+GetGamePlayerControlMaxspeed() -- command used by the default player control mechanism
+GetGamePlayerControlTopspeed() -- command used by the default player control mechanism
+GetGamePlayerControlMovement() -- command used by the default player control mechanism
+GetGamePlayerControlMovey() -- command used by the default player control mechanism
+GetGamePlayerControlLastMovement() -- command used by the default player control mechanism
+GetGamePlayerControlFootfallCount() -- command used by the default player control mechanism
+GetGamePlayerControlLastMovement() -- command used by the default player control mechanism
+GetGamePlayerControlGravityActive() -- command used by the default player control mechanism
+GetGamePlayerControlPlrHitFloorMaterial() -- command used by the default player control mechanism
+GetGamePlayerControlUnderwater() -- command used by the default player control mechanism
+GetGamePlayerControlJumpMode() -- command used by the default player control mechanism
+GetGamePlayerControlJumpModeCanAffectVelocityCountdown() -- command used by the default player control mechanism
+GetGamePlayerControlSpeed() -- command used by the default player control mechanism
+GetGamePlayerControlAccel() -- command used by the default player control mechanism
+GetGamePlayerControlSpeedRatio() -- command used by the default player control mechanism
+GetGamePlayerControlWobble() -- command used by the default player control mechanism
+GetGamePlayerControlWobbleSpeed() -- command used by the default player control mechanism
+GetGamePlayerControlWobbleHeight() -- command used by the default player control mechanism
+GetGamePlayerControlJumpmax() -- command used by the default player control mechanism
+GetGamePlayerControlPushangle() -- command used by the default player control mechanism
+GetGamePlayerControlPushforce() -- command used by the default player control mechanism
+GetGamePlayerControlFootfallPace() -- command used by the default player control mechanism
+GetGamePlayerControlFinalCameraAngley() -- command used by the default player control mechanism
+GetGamePlayerControlLockAtHeight() -- command used by the default player control mechanism
+GetGamePlayerControlControlHeight() -- command used by the default player control mechanism
+GetGamePlayerControlControlHeightCooldown() -- command used by the default player control mechanism
+GetGamePlayerControlStoreMovey() -- command used by the default player control mechanism
+GetGamePlayerControlPlrHitFloorMaterial() -- command used by the default player control mechanism
+GetGamePlayerControlHurtFall() -- command used by the default player control mechanism
+GetGamePlayerControlLeanoverAngle() -- command used by the default player control mechanism
+GetGamePlayerControlLeanover() -- command used by the default player control mechanism
+GetGamePlayerControlCameraShake() -- command used by the default player control mechanism
+GetGamePlayerControlFinalCameraAnglex() -- command used by the default player control mechanism
+GetGamePlayerControlFinalCameraAngley() -- command used by the default player control mechanism
+GetGamePlayerControlFinalCameraAnglez() -- command used by the default player control mechanism
+GetGamePlayerControlCamRightMouseMode() -- command used by the default player control mechanism
+GetGamePlayerControlCamCollisionSmooth() -- command used by the default player control mechanism
+GetGamePlayerControlCamCurrentDistance() -- command used by the default player control mechanism
+GetGamePlayerControlCamDoFullRayCheck() -- command used by the default player control mechanism
+GetGamePlayerControlLastGoodcx() -- command used by the default player control mechanism
+GetGamePlayerControlLastGoodcy() -- command used by the default player control mechanism
+GetGamePlayerControlLastGoodcz() -- command used by the default player control mechanism
+GetGamePlayerControlCamDoFullRayCheck() -- command used by the default player control mechanism
+GetGamePlayerControlFlinchx() -- command used by the default player control mechanism
+GetGamePlayerControlFlinchy() -- command used by the default player control mechanism
+GetGamePlayerControlFlinchz() -- command used by the default player control mechanism
+GetGamePlayerControlFlinchCurrentx() -- command used by the default player control mechanism
+GetGamePlayerControlFlinchCurrenty() -- command used by the default player control mechanism
+GetGamePlayerControlFlinchCurrentz() -- command used by the default player control mechanism
+GetGamePlayerControlFootfallType() -- command used by the default player control mechanism
+GetGamePlayerControlRippleCount() -- command used by the default player control mechanism
+GetGamePlayerControlLastFootfallSound() -- command used by the default player control mechanism
+GetGamePlayerControlInWaterState() -- command used by the default player control mechanism
+GetGamePlayerControlDrownTimestamp() -- command used by the default player control mechanism
+GetGamePlayerControlDeadTime() -- command used by the default player control mechanism
+GetGamePlayerControlSwimTimestamp() -- command used by the default player control mechanism
+GetGamePlayerControlRedDeathFog() -- command used by the default player control mechanism
+GetGamePlayerControlHeartbeatTimeStamp() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonEnabled() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCharacterIndex() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraFollow() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraFocus() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCharactere() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraFollow() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonShotFired() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraDistance() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraSpeed() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraLocked() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraHeight() -- command used by the default player control mechanism
+GetGamePlayerControlThirdpersonCameraShoulder() -- command used by the default player control mechanism
+SetGamePlayerControlJetpackMode() -- command used by the default player control mechanism
+SetGamePlayerControlJetpackFuel() -- command used by the default player control mechanism
+SetGamePlayerControlJetpackHidden() -- command used by the default player control mechanism
+SetGamePlayerControlJetpackCollected() -- command used by the default player control mechanism
+SetGamePlayerControlSoundStartIndex() -- command used by the default player control mechanism
+SetGamePlayerControlJetpackParticleEmitterIndex() -- command used by the default player control mechanism
+SetGamePlayerControlJetpackThrust() -- command used by the default player control mechanism
+SetGamePlayerControlStartStrength() -- command used by the default player control mechanism
+SetGamePlayerControlIsRunning() -- command used by the default player control mechanism
+SetGamePlayerControlFinalCameraAngley() -- command used by the default player control mechanism
+SetGamePlayerControlCx() -- command used by the default player control mechanism
+SetGamePlayerControlCy() -- command used by the default player control mechanism
+SetGamePlayerControlCz() -- command used by the default player control mechanism
+SetGamePlayerControlBasespeed() -- command used by the default player control mechanism
+SetGamePlayerControlCanRun() -- command used by the default player control mechanism
+SetGamePlayerControlMaxspeed() -- command used by the default player control mechanism
+SetGamePlayerControlTopspeed() -- command used by the default player control mechanism
+SetGamePlayerControlMovement() -- command used by the default player control mechanism
+SetGamePlayerControlMovey() -- command used by the default player control mechanism
+SetGamePlayerControlLastMovement() -- command used by the default player control mechanism
+SetGamePlayerControlFootfallCount() -- command used by the default player control mechanism
+SetGamePlayerControlLastMovement() -- command used by the default player control mechanism
+SetGamePlayerControlGravityActive() -- command used by the default player control mechanism
+SetGamePlayerControlPlrHitFloorMaterial() -- command used by the default player control mechanism
+SetGamePlayerControlUnderwater() -- command used by the default player control mechanism
+SetGamePlayerControlJumpMode() -- command used by the default player control mechanism
+SetGamePlayerControlJumpModeCanAffectVelocityCountdown() -- command used by the default player control mechanism
+SetGamePlayerControlSpeed() -- command used by the default player control mechanism
+SetGamePlayerControlAccel() -- command used by the default player control mechanism
+SetGamePlayerControlSpeedRatio() -- command used by the default player control mechanism
+SetGamePlayerControlWobble() -- command used by the default player control mechanism
+SetGamePlayerControlWobbleSpeed() -- command used by the default player control mechanism
+SetGamePlayerControlWobbleHeight() -- command used by the default player control mechanism
+SetGamePlayerControlJumpmax() -- command used by the default player control mechanism
+SetGamePlayerControlPushangle() -- command used by the default player control mechanism
+SetGamePlayerControlPushforce() -- command used by the default player control mechanism
+SetGamePlayerControlFootfallPace() -- command used by the default player control mechanism
+SetGamePlayerControlFinalCameraAngley() -- command used by the default player control mechanism
+SetGamePlayerControlLockAtHeight() -- command used by the default player control mechanism
+SetGamePlayerControlControlHeight() -- command used by the default player control mechanism
+SetGamePlayerControlControlHeightCooldown() -- command used by the default player control mechanism
+SetGamePlayerControlStoreMovey() -- command used by the default player control mechanism
+SetGamePlayerControlPlrHitFloorMaterial() -- command used by the default player control mechanism
+SetGamePlayerControlHurtFall() -- command used by the default player control mechanism
+SetGamePlayerControlLeanoverAngle() -- command used by the default player control mechanism
+SetGamePlayerControlLeanover() -- command used by the default player control mechanism
+SetGamePlayerControlCameraShake() -- command used by the default player control mechanism
+SetGamePlayerControlFinalCameraAnglex() -- command used by the default player control mechanism
+SetGamePlayerControlFinalCameraAngley() -- command used by the default player control mechanism
+SetGamePlayerControlFinalCameraAnglez() -- command used by the default player control mechanism
+SetGamePlayerControlCamRightMouseMode() -- command used by the default player control mechanism
+SetGamePlayerControlCamCollisionSmooth() -- command used by the default player control mechanism
+SetGamePlayerControlCamCurrentDistance() -- command used by the default player control mechanism
+SetGamePlayerControlCamDoFullRayCheck() -- command used by the default player control mechanism
+SetGamePlayerControlLastGoodcx() -- command used by the default player control mechanism
+SetGamePlayerControlLastGoodcy() -- command used by the default player control mechanism
+SetGamePlayerControlLastGoodcz() -- command used by the default player control mechanism
+SetGamePlayerControlCamDoFullRayCheck() -- command used by the default player control mechanism
+SetGamePlayerControlFlinchx() -- command used by the default player control mechanism
+SetGamePlayerControlFlinchy() -- command used by the default player control mechanism
+SetGamePlayerControlFlinchz() -- command used by the default player control mechanism
+SetGamePlayerControlFlinchCurrentx() -- command used by the default player control mechanism
+SetGamePlayerControlFlinchCurrenty() -- command used by the default player control mechanism
+SetGamePlayerControlFlinchCurrentz() -- command used by the default player control mechanism
+SetGamePlayerControlFootfallType() -- command used by the default player control mechanism
+SetGamePlayerControlRippleCount() -- command used by the default player control mechanism
+SetGamePlayerControlLastFootfallSound() -- command used by the default player control mechanism
+SetGamePlayerControlInWaterState() -- command used by the default player control mechanism
+SetGamePlayerControlDrownTimestamp() -- command used by the default player control mechanism
+SetGamePlayerControlDeadTime() -- command used by the default player control mechanism
+SetGamePlayerControlSwimTimestamp() -- command used by the default player control mechanism
+SetGamePlayerControlRedDeathFog() -- command used by the default player control mechanism
+SetGamePlayerControlHeartbeatTimeStamp() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonEnabled() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCharacterIndex() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraFollow() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraFocus() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCharactere() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraFollow() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonShotFired() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraDistance() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraSpeed() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraLocked() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraHeight() -- command used by the default player control mechanism
+SetGamePlayerControlThirdpersonCameraShoulder() -- command used by the default player control mechanism
+SetGamePlayerStateGunMode() -- command used by the default player control mechanism
+GetGamePlayerStateGunMode() -- command used by the default player control mechanism
+SetGamePlayerStateFiringMode() -- command used by the default player control mechanism
+GetGamePlayerStateFiringMode() -- returns a value of 1 when the LMB is pressed, even if the player has not got any weapons
+GetGamePlayerStateWeaponAmmoIndex() -- command used by the default player control mechanism
+GetGamePlayerStateAmmoOffset() -- command used by the default player control mechanism
+GetGamePlayerStateGunMeleeKey() -- command used by the default player control mechanism
+GetGamePlayerStateBlockingAction() -- command used by the default player control mechanism
+SetGamePlayerStateGunShootNoAmmo() -- command used by the default player control mechanism
+GetGamePlayerStateGunShootNoAmmo() -- command used by the default player control mechanism
+SetGamePlayerStateUnderwater() -- command used by the default player control mechanism
+GetGamePlayerStateUnderwater() -- command used by the default player control mechanism
+SetGamePlayerStateRightMouseHold() -- command used by the default player control mechanism
+GetGamePlayerStateRightMouseHold() -- command used by the default player control mechanism
+SetGamePlayerStateXBOX() -- command used by the default player control mechanism
+GetGamePlayerStateXBOX() -- command used by the default player control mechanism
+JoystickX() -- returns a value between -1000 and +1000 representing X axis of controller
+JoystickY() -- returns a value between -1000 and +1000 representing Y axis of controller
+JoystickZ() -- returns a value between -1000 and +1000 representing Trigger of controller
+SetGamePlayerStateGunZoomMode() -- command used by the default player control mechanism
+GetGamePlayerStateGunZoomMode() -- command used by the default player control mechanism
+SetGamePlayerStateGunZoomMag() -- command used by the default player control mechanism
+GetGamePlayerStateGunZoomMag() -- command used by the default player control mechanism
+SetGamePlayerStateGunReloadNoAmmo() -- command used by the default player control mechanism
+GetGamePlayerStateGunReloadNoAmmo() -- command used by the default player control mechanism
+SetGamePlayerStatePlrReloading() -- command used by the default player control mechanism
+GetGamePlayerStatePlrReloading() -- command used by the default player control mechanism
+SetGamePlayerStateGunAltSwapKey1() -- command used by the default player control mechanism
+GetGamePlayerStateGunAltSwapKey1() -- command used by the default player control mechanism
+SetGamePlayerStateGunAltSwapKey2() -- command used by the default player control mechanism
+GetGamePlayerStateGunAltSwapKey2() -- command used by the default player control mechanism
+SetGamePlayerStateWeaponKeySelection() -- command used by the default player control mechanism
+GetGamePlayerStateWeaponKeySelection() -- command used by the default player control mechanism
+SetGamePlayerStateWeaponIndex() -- command used by the default player control mechanism
+GetGamePlayerStateWeaponIndex() -- command used by the default player control mechanism
+SetGamePlayerStateCommandNewWeapon() -- command used by the default player control mechanism
+GetGamePlayerStateCommandNewWeapon() -- command used by the default player control mechanism
+SetGamePlayerStateGunID() -- command used by the default player control mechanism
+GetGamePlayerStateGunID() -- command used by the default player control mechanism
+SetGamePlayerStateGunSelectionAfterHide() -- command used by the default player control mechanism
+GetGamePlayerStateGunSelectionAfterHide() -- command used by the default player control mechanism
+SetGamePlayerStateGunBurst() -- command used by the default player control mechanism
+GetGamePlayerStateGunBurst() -- command used by the default player control mechanism
+JoystickHatAngle() -- command used by the default player control mechanism
+JoystickFireXL() -- command used by the default player control mechanism
+JoystickTwistX() -- command used by the default player control mechanism
+JoystickTwistY() -- command used by the default player control mechanism
+JoystickTwistZ() -- command used by the default player control mechanism
+SetGamePlayerStatePlrZoomInChange() -- command used by the default player control mechanism
+GetGamePlayerStatePlrZoomInChange() -- command used by the default player control mechanism
+SetGamePlayerStatePlrZoomIn() -- command used by the default player control mechanism
+GetGamePlayerStatePlrZoomIn() -- command used by the default player control mechanism
+SetGamePlayerStateLuaActiveMouse() -- command used by the default player control mechanism
+GetGamePlayerStateLuaActiveMouse() -- command used by the default player control mechanism
+SetGamePlayerStateRealFov() -- command used by the default player control mechanism
+GetGamePlayerStateRealFov() -- command used by the default player control mechanism
+SetGamePlayerStateDisablePeeking() -- command used by the default player control mechanism
+GetGamePlayerStateDisablePeeking() -- command used by the default player control mechanism
+SetGamePlayerStatePlrHasFocus() -- command used by the default player control mechanism
+GetGamePlayerStatePlrHasFocus() -- command used by the default player control mechanism
+SetGamePlayerStateGameRunAsMultiplayer() -- command used by the default player control mechanism
+GetGamePlayerStateGameRunAsMultiplayer() -- command used by the default player control mechanism
+SetGamePlayerStateSteamWorksRespawnLeft() -- command used by the default player control mechanism
+GetGamePlayerStateSteamWorksRespawnLeft() -- command used by the default player control mechanism
+SetGamePlayerStateTabMode() -- command used by the default player control mechanism
+GetGamePlayerStateTabMode() -- command used by the default player control mechanism
+SetGamePlayerStateLowFpsWarning() -- command used by the default player control mechanism
+GetGamePlayerStateLowFpsWarning() -- command used by the default player control mechanism
+SetGamePlayerStateCameraFov() -- command used by the default player control mechanism
+GetGamePlayerStateCameraFov() -- command used by the default player control mechanism
+SetGamePlayerStateCameraFovZoomed() -- command used by the default player control mechanism
+GetGamePlayerStateCameraFovZoomed() -- command used by the default player control mechanism
+SetGamePlayerStateMouseInvert() -- command used by the default player control mechanism
+GetGamePlayerStateMouseInvert() -- command used by the default player control mechanism
+SetGamePlayerStateSlowMotion() -- command used by the default player control mechanism
+GetGamePlayerStateSlowMotion() -- command used by the default player control mechanism
+SetGamePlayerStateSmoothCameraKeys() -- command used by the default player control mechanism
+GetGamePlayerStateSmoothCameraKeys() -- command used by the default player control mechanism
+SetGamePlayerStateCamMouseMoveX() -- command used by the default player control mechanism
+GetGamePlayerStateCamMouseMoveX() -- command used by the default player control mechanism
+SetGamePlayerStateCamMouseMoveY() -- command used by the default player control mechanism
+GetGamePlayerStateCamMouseMoveY() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilX() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilX() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilY() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilY() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilAngleX() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilAngleX() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilAngleY() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilAngleY() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilCorrectY() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilCorrectY() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilCorrectX() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilCorrectX() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilCorrectAngleY() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilCorrectAngleY() -- command used by the default player control mechanism
+SetGamePlayerStateGunRecoilCorrectAngleX() -- command used by the default player control mechanism
+GetGamePlayerStateGunRecoilCorrectAngleX() -- command used by the default player control mechanism
+SetGamePlayerStateCamAngleX() -- command used by the default player control mechanism
+GetGamePlayerStateCamAngleX() -- command used by the default player control mechanism
+SetGamePlayerStateCamAngleY() -- command used by the default player control mechanism
+GetGamePlayerStateCamAngleY() -- command used by the default player control mechanism
+SetGamePlayerStatePlayerDucking() -- command used by the default player control mechanism
+GetGamePlayerStatePlayerDucking() -- command used by the default player control mechanism
+SetGamePlayerStateEditModeActive() -- command used by the default player control mechanism
+GetGamePlayerStateEditModeActive() -- command used by the default player control mechanism
+SetGamePlayerStatePlrKeyShift() -- command used by the default player control mechanism
+GetGamePlayerStatePlrKeyShift() -- command used by the default player control mechanism
+SetGamePlayerStatePlrKeyShift2() -- command used by the default player control mechanism
+GetGamePlayerStatePlrKeyShift2() -- command used by the default player control mechanism
+SetGamePlayerStatePlrKeyControl() -- command used by the default player control mechanism
+GetGamePlayerStatePlrKeyControl() -- command used by the default player control mechanism
+SetGamePlayerStateNoWater() -- command used by the default player control mechanism
+GetGamePlayerStateNoWater() -- command used by the default player control mechanism
+SetGamePlayerStateWaterlineY() -- command used by the default player control mechanism
+GetGamePlayerStateWaterlineY() -- command used by the default player control mechanism
+SetGamePlayerStateFlashlightKeyEnabled() -- command used by the default player control mechanism
+GetGamePlayerStateFlashlightKeyEnabled() -- command used by the default player control mechanism
+SetGamePlayerStateFlashlightControl() -- command used by the default player control mechanism
+GetGamePlayerStateFlashlightControl() -- command used by the default player control mechanism
+SetGamePlayerStateMoving() -- command used by the default player control mechanism
+GetGamePlayerStateMoving() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainHeight() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainHeight() -- command used by the default player control mechanism
+SetGamePlayerStateJetpackVerticalMove() -- command used by the default player control mechanism
+GetGamePlayerStateJetpackVerticalMove() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainID() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainID() -- command used by the default player control mechanism
+SetGamePlayerStateEnablePlrSpeedMods() -- command used by the default player control mechanism
+GetGamePlayerStateEnablePlrSpeedMods() -- command used by the default player control mechanism
+SetGamePlayerStateRiftMode() -- command used by the default player control mechanism
+GetGamePlayerStateRiftMode() -- command used by the default player control mechanism
+SetGamePlayerStatePlayerX() -- command used by the default player control mechanism
+GetGamePlayerStatePlayerX() -- command used by the default player control mechanism
+SetGamePlayerStatePlayerY() -- command used by the default player control mechanism
+GetGamePlayerStatePlayerY() -- command used by the default player control mechanism
+SetGamePlayerStatePlayerZ() -- command used by the default player control mechanism
+GetGamePlayerStatePlayerZ() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainPlayerX() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainPlayerX() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainPlayerY() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainPlayerY() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainPlayerZ() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainPlayerZ() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainPlayerAX() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainPlayerAX() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainPlayerAY() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainPlayerAY() -- command used by the default player control mechanism
+SetGamePlayerStateTerrainPlayerAZ() -- command used by the default player control mechanism
+GetGamePlayerStateTerrainPlayerAZ() -- command used by the default player control mechanism
+SetGamePlayerStateAdjustBasedOnWobbleY() -- command used by the default player control mechanism
+GetGamePlayerStateAdjustBasedOnWobbleY() -- command used by the default player control mechanism
+SetGamePlayerStateFinalCamX() -- command used by the default player control mechanism
+GetGamePlayerStateFinalCamX() -- command used by the default player control mechanism
+SetGamePlayerStateFinalCamY() -- command used by the default player control mechanism
+GetGamePlayerStateFinalCamY() -- command used by the default player control mechanism
+SetGamePlayerStateFinalCamZ() -- command used by the default player control mechanism
+GetGamePlayerStateFinalCamZ() -- command used by the default player control mechanism
+SetGamePlayerStateShakeX() -- command used by the default player control mechanism
+GetGamePlayerStateShakeX() -- command used by the default player control mechanism
+SetGamePlayerStateShakeY() -- command used by the default player control mechanism
+GetGamePlayerStateShakeY() -- command used by the default player control mechanism
+SetGamePlayerStateShakeZ() -- command used by the default player control mechanism
+GetGamePlayerStateShakeZ() -- command used by the default player control mechanism
+SetGamePlayerStateImmunity() -- command used by the default player control mechanism
+GetGamePlayerStateImmunity() -- command used by the default player control mechanism
+SetGamePlayerStateCharAnimIndex() -- command used by the default player control mechanism
+GetGamePlayerStateCharAnimIndex() -- command used by the default player control mechanism
+
+SetGamePlayerStateIsMelee() -- by default sets current weapon, can specify optional gunid and firemode
+GetGamePlayerStateIsMelee() -- command used by the default player control mechanism
+SetGamePlayerStateAlternate() -- by default sets current weapon, can specify optional gunid and firemode
+GetGamePlayerStateAlternate() -- command used by the default player control mechanism
+SetGamePlayerStateModeShareMags() -- by default sets current weapon, can specify optional gunid and firemode
+GetGamePlayerStateModeShareMags() -- command used by the default player control mechanism
+SetGamePlayerStateAlternateIsFlak() -- by default sets current weapon, can specify optional gunid and firemode
+GetGamePlayerStateAlternateIsFlak() -- command used by the default player control mechanism
+SetGamePlayerStateAlternateIsRay() -- by default sets current weapon, can specify optional gunid and firemode
+GetGamePlayerStateAlternateIsRay() -- command used by the default player control mechanism
+SetFireModeSettingsReloadQty() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsReloadQty() -- command used by the default player control mechanism
+SetFireModeSettingsIsEmpty() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsIsEmpty() -- command used by the default player control mechanism
+SetFireModeSettingsJammed() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsJammed() -- command used by the default player control mechanism
+SetFireModeSettingsJamChance() -- by default sets current weapon, can specify optional gunid and firemodem
+GetFireModeSettingsJamChance() -- command used by the default player control mechanism
+SetFireModeSettingsMinTimer() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsMinTimer() -- command used by the default player control mechanism
+SetFireModeSettingsAddTimer() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsAddTimer() -- command used by the default player control mechanism
+SetFireModeSettingsShotsFired() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsShotsFired() -- command used by the default player control mechanism
+SetFireModeSettingsCoolTimer() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsCoolTimer() -- command used by the default player control mechanism
+SetFireModeSettingsOverheatAfter() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsOverheatAfter() -- command used by the default player control mechanism
+SetFireModeSettingsJamChanceTime() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsJamChanceTime() -- command used by the default player control mechanism
+SetFireModeSettingsCoolDown() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsCoolDown() -- command used by the default player control mechanism
+SetFireModeSettingsNoSubmergedFire() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsNoSubmergedFire() -- command used by the default player control mechanism
+SetFireModeSettingsSimpleZoom() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsSimpleZoom() -- command used by the default player control mechanism
+SetFireModeSettingsForceZoomOut() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsForceZoomOut() -- command used by the default player control mechanism
+SetFireModeSettingsZoomMode() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsZoomMode() -- command used by the default player control mechanism
+SetFireModeSettingsSimpleZoomAnim() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsSimpleZoomAnim() -- command used by the default player control mechanism
+SetFireModeSettingsPoolIndex() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsPoolIndex() -- command used by the default player control mechanism
+SetFireModeSettingsPlrTurnSpeedMod() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsPlrTurnSpeedMod() -- command used by the default player control mechanism
+SetFireModeSettingsZoomTurnSpeed() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsZoomTurnSpeed() -- command used by the default player control mechanism
+SetFireModeSettingsPlrJumpSpeedMod() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsPlrJumpSpeedMod() -- command used by the default player control mechanism
+SetFireModeSettingsPlrEmptySpeedMod() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsPlrEmptySpeedMod() -- command used by the default player control mechanism
+SetFireModeSettingsPlrMoveSpeedMod() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsPlrMoveSpeedMod() -- command used by the default player control mechanism
+SetFireModeSettingsZoomWalkSpeed() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsZoomWalkSpeed() -- command used by the default player control mechanism
+SetFireModeSettingsPlrReloadSpeedMod() -- default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsPlrReloadSpeedMod() -- command used by the default player control mechanism
+SetFireModeSettingsHasEmpty() -- by default sets current weapon, can specify optional gunid and firemode
+GetFireModeSettingsHasEmpty() -- command used by the default player control mechanism
+GetFireModeSettingsActionBlockStart() -- command used by the default player control mechanism
+
+SetGamePlayerStateGunSound() -- command used by the default player control mechanism
+GetGamePlayerStateGunSound() -- command used by the default player control mechanism
+SetGamePlayerStateGunAltSound() -- command used by the default player control mechanism
+GetGamePlayerStateGunAltSound() -- command used by the default player control mechanism
+CopyCharAnimState() -- command used by the default player control mechanism
+SetCharAnimStatePlayCsi() -- command used by the default player control mechanism
+GetCharAnimStatePlayCsi() -- command used by the default player control mechanism
+SetCharAnimStateOriginalE() -- command used by the default player control mechanism
+GetCharAnimStateOriginalE() -- command used by the default player control mechanism
+SetCharAnimStateObj() -- command used by the default player control mechanism
+GetCharAnimStateObj() -- command used by the default player control mechanism
+SetCharAnimStateAnimationSpeed() -- command used by the default player control mechanism
+GetCharAnimStateAnimationSpeed() -- command used by the default player control mechanism
+SetCharAnimStateE() -- command used by the default player control mechanism
+GetCharAnimStateE() -- command used by the default player control mechanism
+GetCsiStoodVault() -- command used by the default player control mechanism
+GetCharSeqTrigger() -- command used by the default player control mechanism
+GetEntityElementBankIndex() -- command used by the default player control mechanism
+GetEntityElementObj() -- command used by the default player control mechanism
+GetEntityElementRagdollified() -- command used by the default player control mechanism
+GetEntityElementSpeedModulator() -- command used by the default player control mechanism
+GetEntityProfileJumpModifier() -- command used by the default player control mechanism
+GetEntityProfileStartOfAIAnim() -- command used by the default player control mechanism
+GetEntityProfileJumpHold() -- command used by the default player control mechanism
+GetEntityProfileJumpResume() -- command used by the default player control mechanism
+SetCharAnimControlsLeaping() -- command used by the default player control mechanism
+GetCharAnimControlsLeaping() -- command used by the default player control mechanism
+SetCharAnimControlsMoving() -- command used by the default player control mechanism
+GetCharAnimControlsMoving() -- command used by the default player control mechanism
+GetEntityAnimStart() -- command used by the default player control mechanism
+GetEntityAnimFinish() -- command used by the default player control mechanism
+
+Understanding PREEXIT system
+----------------------------
+SetPreExitValue(e,value) -- where e is the entity and a value of 2 will exit preexit function
+function ai_melee_animmove_init(e)
+ SetPreExitValue(e,0) -- set this to zero to clear out this value for the entity
+end
+function ai_melee_animmove_preexit(e)
+ SetPreExitValue(e,1) -- setting this to one will ensure we keep calling preexit over and over
+ if module_combatmelee.preexit(e,ai_movetype_useanim) == 1 then
+  SetPreExitValue(e,2) -- when we set this to two, we instruct the engine to stop calling preexit and go to _exit
+ end
+end
+function ai_melee_animmove_exit(e)
+ module_combatmelee.exit(e)
+end
+
+These AI commands represent a subset of the DarkAI system (further help referenced at Docs\DarkAI Documentation):
+
+NEW MANUAL MODE COMMANDS
+AIEntityGoToPosition(obj,x,z) -- where obj is the object number of the entity.Use this for legacy AI bot movement
+AIEntityGoToPosition(obj,x,z,containerindex) -- where obj is the object number of the entity. New decoupled AI bot manual control
+AISetEntityControl(obj,controlmode) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIEntityStop(obj) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIGetEntityCanSee(obj,x,z,groundflag) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIGetEntityViewRange(obj) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIGetEntityHeardSound(obj) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AICouldSee(obj,x,y,z) -- where obj is the object number of the entity. XYZ of the point in space tested line of sight by the AI
+AIGetEntityIsMoving(obj) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AISetEntityPosition(obj,x,y,z) -- where obj is the object number of the entity and XYZ are the new coordinates
+AISetEntityTurnSpeed(obj,speed) -- where obj is the object number and speed is the turning speed for navigating entities
+AIGetEntitySpeed(obj) -- speed = AIGetEntitySpeed(obj) where obj is the object number of the entity and returns the movement speed of the entity
+AIGetTotalPaths() -- returns the number of created paths
+AIGetPathCountPoints(pathnumber) -- where pathnumber is the internal number of the path
+AIPathGetPointX(pathnumber,pointindex) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIPathGetPointY(pathnumber,pointindex) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIPathGetPointZ(pathnumber,pointindex) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIGetTotalCover() -- returns the number of created cover zones
+AICoverGetPointX(coverindex) -- where coverindex is the index of the cover marker and returns the X position
+AICoverGetPointY(coverindex) -- where coverindex is the index of the cover marker and returns the Y position
+AICoverGetPointZ(coverindex) -- where coverindex is the index of the cover marker and returns the Z position
+AICoverGetAngle(coverindex) -- where coverindex is the index of the cover marker and returns the Y angle position
+AICoverGetIfUsed(coverindex) -- where coverindex is the index of the cover marker and returns string from IFUSED field
+
+SetRotationYSlowly(e,destangle,smoothvalue) -- where e is the entity and a smooth value of 100 is immediate, where 50 takes twice as long to rotate to destangle
+
+OLD LEGACY AUTOMATIC COMMANDS
+AIEntityAssignPatrolPath(obj,pathid) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIEntityAddTarget(obj,targetid) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIEntityRemoveTarget(obj,targetid) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIEntityMoveToCover(obj,x,z) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+AIGetEntityCanFire(obj) -- where obj is the object number of the entity. See DarkAI docs for parameter descriptions
+
+GetHeadTracker() -- returns a value of one if the head tracker is connected
+ResetHeadTracker() -- resets the tracker to signal device is facing forward
+GetHeadTrackerYaw() - returns the yaw of the head tracker if attached
+GetHeadTrackerPitch() - returns the pitch of the head tracker if attached
+GetHeadTrackerRoll() - returns the roll of the head tracker if attached
+
+Prompt3D(text,duration) -- renders a 3D text panel in front of camera showing 'text'
+PositionPrompt3D(x,y,z,angle) -- repositions 3D text panel to any XYZ world coordinate
+
+ScaleObject(obj,x,y,z) -- Scales object in all axis (uses object id not entity!)
+
+SetSkyTo(str) -- where str is the folder name of the sky you want to change to
+
+***** The following five functions return multiple values, if you do not need them all just replace 
+***** the ones you don't need with '_' for example : _, _, _, Ax, Ay, Az = GetEntityPosAng(e) would
+***** just give you last three of the 6 values returned
+GetObjectPosAng(obj) -- x, y, z, Ax, Ay, Az = GetObjectPosAng(obj) returns position and Euler angles of object
+GetEntityPosAng(e) -- x, y, z, Ax, Ay, Az = GetEntityPosAng(e) returns position and Euler angles of entity
+GetObjectScales(obj) -- xs, ys, zs = GetObjectScales(obj) returns scale values of object in all axis (uses object id not entity!)
+GetEntityWeight(e) -- weight = GetEntityWeight(e) returns the Physics weight value of the entity
+
+***** Collision box is defined by coordinates of two opposing corners, from these it is easy to calculate the size of the object
+GetObjectColBox(obj) -- xmin, ymin, zmin, xmax, ymax, zmax = GetObjectColBox(obj) returns collision cube of object
+GetEntityColBox(e) -- xmin, ymin, zmin, xmax, ymax, zmax = GetEntityColBox(e) returns collision cube of entity
+
+***** Lua control of dynamic light, you get the light number using entity e number then use that in the other light functions
+***** for example; lightNum = GetEntityLightNumber(e)  then  x, y, z = GetLightPosition(lightNum)
+GetEntityLightNumber(e) -- lightNum = GetEntityLightNumber(e) returns the internal light number held by the entity
+GetLightPosition(lightNum) -- x, y, z = GetLightPosition(lightNum) returns the XYZ position of the dynamic light specified
+GetLightAngle(LightNum) -- xv, yv, zv = GetLightAngle(LightNum) returns the angle vector of the dynamic light specified
+GetLightRGB(lightNum) -- r, g, b = GetLightRGB(lightNum) returns the RGB color of the dynamic light specified
+GetLightRange(lightNum) -- range = GetLightRange(lightNum) returns the range value of the dynamic light specified
+SetLightPosition(lightNum,x,y,z) -- sets the new position of the specified dynamic light
+SetLightAngle(lightNum,xv,yv,zv) -- sets the angle vector of the specified light ( e.g. 0, 0, 1 would be 'North' or +Z axis )
+SetLightRGB(lightNum,r,g,b) -- sets the new color of the specified dynamic light
+SetLightRange(lightNum,range) -- sets the new range (1 to 10000) of the specified light
+
+***Water Shader Settings*** Look into the shader for informations about these values(open effectbank/reloaded/water_basic.fx with i.e. notepad)
+SetWaterHeight(value) -- sets water setting attributes
+SetWaterColor(red,green,blue) -- sets water setting attributes
+SetWaterWaveIntensity(value) -- sets water setting attributes
+SetWaterTransparancy(value) -- sets water setting attributes
+SetWaterReflection(value) -- sets water setting attributes
+SetWaterReflectionSparkleIntensity(value) -- sets water setting attributes
+SetWaterFlowDirection(x,y,speed) small tip: -1 =east/north; 1=west/south - speed is a multiplier of the flowdirection(higher => fast flow)
+SetWaterDistortionWaves(value) -- sets water setting attributes
+SetRippleWaterSpeed(value) -- sets water setting attributes
+GetWaterHeight() -- gets water setting attributes
+GetWaterWaveIntensity() -- gets water setting attributes
+GetWaterShaderColorRed() -- gets water setting attributes
+GetWaterShaderColorGreen() -- gets water setting attributes
+GetWaterShaderColorBlue() -- gets water setting attributes
+GetWaterTransparancy() -- gets water setting attributes
+GetWaterReflection() -- gets water setting attributes
+GetWaterReflectionSparkleIntensity() -- gets water setting attributes
+GetWaterFlowDirectionX() -- gets water setting attributes
+GetWaterFlowDirectionY() -- gets water setting attributes
+GetWaterFlowSpeed() -- gets water setting attributes
+GetWaterDistortionWaves() -- gets water setting attributes
+GetRippleWaterSpeed() -- gets water setting attributes
