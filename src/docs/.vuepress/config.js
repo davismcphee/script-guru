@@ -1,7 +1,9 @@
 const getConfig = require("vuepress-bar");
+const path = require("path");
 
 module.exports = {
   title: "ScriptGuru",
+  dest: path.join(__dirname, "../../../dist"),
   themeConfig: {
     logo: "/assets/img/logo.svg",
     searchMaxSuggestions: 20,
