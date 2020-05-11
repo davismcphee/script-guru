@@ -1,7 +1,33 @@
 # Weapons Globals
 
-::: danger UNDOCUMENTED
-These globals have not been documented yet. :cry:
+GameGuru exposes these globals to access weapon properties:
 
-<p>If you know of any globals we should add here, consider writing some documentation and submitting a pull request.</p>
-:::
+```lua
+g_projectileevent_damage
+
+g_projectileevent_entityhit
+
+g_projectileevent_explosion
+
+g_projectileevent_name
+
+g_projectileevent_radius
+
+g_projectileevent_x
+
+g_projectileevent_y
+
+g_projectileevent_z
+
+g_WeaponAmmo
+
+g_WeaponClipAmmo
+
+g_WeaponPoolAmmo
+
+g_WeaponSlotGot
+
+g_WeaponSlotPref
+
+weapon_name
+```

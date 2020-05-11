@@ -60,9 +60,6 @@ g_PlayerLives = 3
 -- The player's object number
 g_PlayerObjNo = 42
 
--- Flag indicating whether or not third person mode is enabled
-g_PlayerThirdPerson = 1
-
 -- The X coordinate of the player's current position
 g_PlayerPosX = 100
 
@@ -71,4 +68,9 @@ g_PlayerPosY = 100
 
 -- The Z coordinate of the player's current position
 g_PlayerPosZ = 100
+
+-- Flag indicating whether or not third person mode is enabled
+g_PlayerThirdPerson = 1
+
+g_PlayerUnderwaterMode = 1
 ```

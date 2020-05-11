@@ -72,4 +72,8 @@ g_Entity[e] = {
   -- The Z coordinate of the entity's current position
   z = 90
 }
+
+g_EntityElementMax
+
+g_EntityExtra
 ```

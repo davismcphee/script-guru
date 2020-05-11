@@ -1,12 +1,26 @@
+# GlobalLoop(flag)
+# SendMessage
+# SendMessageF
+# SendMessageI
+# SendMessageS
+# SetCheckpoint - Only in MAX
 FinishLevel()
+GameLoopInit(startHealth, regenRate, regenSpeed, regenDelay)
+GameLoopLoadStats()
+GameLoopQuit()
+GameLoopSaveStats()
 GetElapsedTime()
 GetTimeElapsed()
 HideHuds()
+Include(path)
+IsTestGame()
 JumpToLevel(levelname)
 LeaveGame()
 LevelFilenameToLoad(strLevelName)
 LoadGame()
 QuitGame()
+ResetFade()
+RestoreGameFromSlot(i)
 ResumeGame()
 SaveGame()
 SetLoadingResource(i, v)

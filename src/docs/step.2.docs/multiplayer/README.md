@@ -1,7 +1,35 @@
 # Multiplayer Globals
 
-::: danger UNDOCUMENTED
-These globals have not been documented yet. :cry:
+GameGuru exposes these globals to access multiplayer properties:
 
-<p>If you know of any globals we should add here, consider writing some documentation and submitting a pull request.</p>
-:::
+```lua
+mp_coop
+
+mp_enemiesLeftToKill
+
+mp_friendlyfireoff
+
+mp_gameMode
+
+mp_isConnectedToSteam
+
+mp_isServer
+
+mp_me
+
+mp_playerConnected
+
+mp_playerDeaths
+
+mp_playerKills
+
+mp_playerNames
+
+mp_playerTeam
+
+mp_servertimer
+
+mp_showscores
+
+mp_teambased
+```

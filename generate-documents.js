@@ -34,7 +34,7 @@ function createTags(functionName) {
 
 const undocumented = `::: danger UNDOCUMENTED
 This function has not been documented yet. :cry:
-<p>If you know what it does and would like to help, consider writing some documentation and submitting a pull request.</p>
+<p>If you know what it does and would like to help, consider writing some documentation and submitting a pull request on [GitHub](https://github.com/davismcphee/script-guru).</p>
 :::`;
 
 function generateDocs(docName) {
@@ -59,7 +59,10 @@ function generateDocs(docName) {
 
       const mdPath = path.join(
         __dirname,
-        `src/docs/step.2.docs/${docName}/${line.replace(/\s/g, "")}.md`
+        `src/docs/step.2.docs/${docName}/${line.substring(
+          0,
+          line.indexOf("(")
+        )}.md`
       );
 
       fs.writeFileSync(

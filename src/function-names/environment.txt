@@ -1,3 +1,4 @@
+# SetSunDirection - Only in MAX
 GetAmbienceBlue()
 GetAmbienceGreen()
 GetAmbienceIntensity()

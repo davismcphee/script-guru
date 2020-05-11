@@ -1,3 +1,12 @@
+# MotionControllerBestAngleX - Only in MAX
+# MotionControllerBestAngleY - Only in MAX
+# MotionControllerBestAngleZ - Only in MAX
+# MotionControllerBestX - Only in MAX
+# MotionControllerBestY - Only in MAX
+# MotionControllerBestZ - Only in MAX
+# MotionControllerLaserGuidedEntityObj - Only in MAX
+# MotionControllerThumbstickX - Only in MAX
+# MotionControllerThumbstickY - Only in MAX
 ActivateMouse()
 DeactivateMouse()
 GetHeadTracker()
@@ -20,3 +29,4 @@ MouseMoveY()
 PositionMouse(x, y)
 ResetHeadTracker()
 SetFlashLightKeyEnabled(v)
+SetGamePlayerStateXBOXControllerType(type)

@@ -1,7 +1,25 @@
 # Game Globals
 
-::: danger UNDOCUMENTED
-These globals have not been documented yet. :cry:
+GameGuru exposes these globals to access game properties:
 
-<p>If you know of any globals we should add here, consider writing some documentation and submitting a pull request.</p>
-:::
+```lua
+g_gameloop_RegenDelay
+
+g_gameloop_RegenRate
+
+g_gameloop_RegenSpeed
+
+g_gameloop_StartHealth
+
+g_GameStateChange
+
+g_LevelFilename
+
+g_objectiveCount
+
+g_Time
+
+g_TimeElapsed
+
+radarObjectives
+```

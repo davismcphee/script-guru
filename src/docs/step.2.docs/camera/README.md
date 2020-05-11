@@ -1,7 +1,17 @@
 # Camera Globals
 
-::: danger UNDOCUMENTED
-These globals have not been documented yet. :cry:
+GameGuru exposes these globals to access camera properties:
 
-<p>If you know of any globals we should add here, consider writing some documentation and submitting a pull request.</p>
-:::
+```lua
+g_camera_owner
+
+g_camera_rememberfov
+
+g_camera_rememberplayerweapon
+
+g_camera_smoothrx
+
+g_camera_smoothry
+
+module_cameraoverride
+```

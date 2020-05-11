@@ -16,3 +16,5 @@ ParticlesSetScale(emitterId, scaleStartMin, scaleStartMax, scaleEndMin, scaleEnd
 ParticlesSetSpeed(emitterId, movementSpeedMinX, movementSpeedMinY, movementSpeedMinZ, movementSpeedMaxX, movementSpeedMaxY, movementSpeedMaxZ)
 ParticlesSetWindVector(windX, windZ)
 ParticlesSpawnParticle(emitterId, xPos, yPos, zPos)
+StartParticleEmitter(e)
+StopParticleEmitter(e)
