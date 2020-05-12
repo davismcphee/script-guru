@@ -1,4 +1,4 @@
-## Player Globals
+# Player Globals
 
 GameGuru exposes these global variables to access the player's properties:
 
