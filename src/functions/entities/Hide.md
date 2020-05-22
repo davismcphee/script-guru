@@ -10,4 +10,12 @@ tags:
 | --------- | ------ | ------------- |
 | e         | number | The entity ID |
 
+## Details
+
 Hide the target entity.
+
+## Example
+
+```lua
+Hide(e)
+```

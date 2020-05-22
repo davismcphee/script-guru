@@ -12,4 +12,12 @@ tags:
 | --------- | ------ | --------------- |
 | str       | string | The weapon name |
 
+## Details
+
 Change the player's weapon based on the provided weapon name.
+
+## Example
+
+```lua
+ChangePlayerWeapon("myWeapon")
+```

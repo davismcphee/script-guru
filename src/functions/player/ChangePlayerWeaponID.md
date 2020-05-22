@@ -4,8 +4,7 @@ tags:
   - Change
   - Player
   - Weapon
-  - I
-  - D
+  - ID
 ---
 
 # ChangePlayerWeaponID(id)
@@ -14,4 +13,12 @@ tags:
 | --------- | ------ | ------------- |
 | id        | number | The weapon ID |
 
+## Details
+
 Change the player's weapon based on the provided weapon ID.
+
+## Example
+
+```lua
+ChangePlayerWeaponID(1)
+```

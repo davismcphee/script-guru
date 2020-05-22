@@ -8,4 +8,12 @@ tags:
 
 # UnFreezePlayer()
 
+## Details
+
 Unfreeze the player's movements.
+
+## Example
+
+```lua
+UnFreezePlayer()
+```

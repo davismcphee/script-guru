@@ -10,4 +10,12 @@ tags:
 | --------- | ------ | ------------- |
 | e         | number | The entity ID |
 
+## Details
+
 Destroy the target entity.
+
+## Example
+
+```lua
+Destroy(e)
+```

@@ -11,4 +11,12 @@ tags:
 | --------- | ------ | ------------- |
 | e         | number | The entity ID |
 
+## Details
+
 Turn collision on for the target entity.
+
+## Example
+
+```lua
+CollisionOn(e)
+```

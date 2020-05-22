@@ -3,9 +3,7 @@ tags:
   - SetPlayerFOV(v)
   - Set
   - Player
-  - F
-  - O
-  - V
+  - FOV
 ---
 
 # SetPlayerFOV(v)
@@ -14,4 +12,12 @@ tags:
 | --------- | ------ | ----------------- |
 | v         | number | The field of view |
 
+## Details
+
 Set the player's field of view to "v".
+
+## Example
+
+```lua
+SetPlayerFOV(90)
+```
